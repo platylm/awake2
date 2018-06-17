@@ -1,0 +1,173 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+
+<title>Welcome to Awake Cafe</title>
+
+<!-- Mobile Specific Meta -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+<!-- Bootstrap  -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/bootstrap-iso.css}" />
+
+<!-- icon fonts font Awesome -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/font-awesome.min.css}" />
+
+<!-- Custom Styles -->
+<link rel="stylesheet" type="text/css" th:href="@{css/style.css}" />
+
+<link rel="stylesheet" type="text/css"	th:href="@{css/Style-Menu-Bar.css}" />
+
+
+<style type="text/css">
+<!--
+.input {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	border-style: none
+}
+-->
+</style>
+</head>
+<body>
+
+<nav class="mobile-menu" th:switch="${showsession}">
+    <label for="show-menu" class="show-menu"><span>Menu</span><div class="lines"></div></label>
+    <input type="checkbox" id="show-menu" />
+		<ul id="menu" th:case="'admin'">
+			<li><a href="/user-info">Home</a></li>
+			<li><a href="/staff-admin">Staff</a></li>
+			<li><a href="/user-check-time">Check Time</a></li>
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown" role="button" aria-haspopup="true"
+				aria-expanded="false">History<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="/history">วันนี้ใครมาทำงานบ้าง?</a></li>
+					<li><a href="/allhistory">ประวัติทำงานของพนักงาน</a></li>
+				</ul></li>
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown" role="button" aria-haspopup="true"
+				aria-expanded="false">Wage<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="/ViewTotalEmp">ดูค่าจ้างพนักงาน</a></li>
+				</ul></li>
+			<li><a href="/logout">Log Out!</a></li>
+		</ul>
+		
+		
+		<ul id="menu" th:case="*">
+			<li><a href="/user-info">Home</a></li>
+			<li><a href="/user-check-time">Check Time</a></li>
+			<li><a href="/logout">Log Out!</a></li>
+		</ul>
+</nav>
+
+<!-- Page Top Section -->
+<section id="page-top" class="section-style" data-background-image="images/background/wallpaper12.jpg">
+    <div class="pattern height-resize">
+        <div class="container">
+            <h1 align="center" class="site-title">
+                    Awake Cafe
+                </h1><!-- /.site-title -->
+                
+<h2 align="center">WELCOME <p th:text="${showsession}"></p> </h2>
+				<div th:switch="${showsession}">
+				<div th:case="'admin'">
+				</div>
+				
+				<div th:case="*">
+					<div th:each="employee:${userList}">
+					<div class="bootstrap-iso" style="background-color: transparent" align="center">
+							   <a th:href='@{/checktimeinfo/{id_emp}(id_emp=${employee.IdEmp})}'><button class="btn btn-success" type="button"> SEE CHECK TIME HISTORY </button></a></div>
+					</div>
+				</div>
+</div>
+<br/><br/>
+        
+            <div id="Clock" class="time-container" >
+                <style type="text/css">
+                    <!--
+                    .input { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt;border-style: none }
+                    -->
+                </style>
+                <div align="center" id="curr_date"></div>
+                <div class="col-sm-3">
+                    <div class="time-box">
+                        <div class="time-box-inner dash hours_dash animated" data-animation="rollIn" data-animation-delay="600">
+							<span id="Hours-Box" class="time-number" >
+							</span>
+
+                            <span class="time-name">Hours</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="time-box">
+                        <div class="time-box-inner dash minutes_dash animated" data-animation="rollIn" data-animation-delay="900">
+								<span id="Minutes-Box" class="time-number">
+
+								</span>
+                            <span class="time-name">Minutes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="time-box">
+                        <div class="time-box-inner dash seconds_dash animated" data-animation="rollIn" data-animation-delay="1200">
+								<span id="Seconds-Box" class="time-number">
+
+								</span>
+                            <span class="time-name">Seconds</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="time-box">
+                        <div class="time-box-inner dash days_dash animated" data-animation="rollIn" data-animation-delay="300">
+								<span id="A_P" class="time-number">
+
+								</span>
+                            <span class="time-name"> </span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div><!-- /.time-count-container -->
+
+        </div><!-- /.container -->
+    </div><!-- /.pattern -->
+
+</section><!-- /#page-top -->
+<!-- Page Top Section  End -->
+
+
+
+
+	<!-- Footer Section -->
+	<footer id="footer-section">
+		<p class="copyright">2014-2015, All Rights Reserved. Designed by
+			Developed by Jewel Theme</p>
+	</footer>
+
+
+	<!-- jQuery Library -->
+	<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+	<!-- Modernizr js -->
+	<script type="text/javascript" src="js/modernizr-2.8.0.min.js"></script>
+	<!-- Plugins -->
+	<script type="text/javascript" src="js/plugins.js"></script>
+	<!-- Custom JavaScript Functions -->
+	<script type="text/javascript" src="js/functions.js"></script>
+	<!-- Custom JavaScript Functions -->
+	<script type="text/javascript" src="js/jquery.ajaxchimp.min.js"></script>
+	<script type="text/javascript" src="js/clock.js"></script>
+</body>
+</html>

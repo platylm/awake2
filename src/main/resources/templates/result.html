@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body bgcolor="lightblue">
+	<h2>THING TO DO</h2>
+	<div th:each="note : ${noteList}">
+		<span th:text="${note.task}"></span> <a
+			th:href="@{editform/{id}(id=${note.nid})}">แก้ไข</a> <a
+			th:href="@{delnote/{id}(id=${note.nid})}">ลบ</a> <br />
+	</div>
+	<br />
+	<form action="addnote" method="post">
+		<input type="text" name="task" /> <input type="submit" value="add" />
+	</form>
+	<form action="searchnote">
+		<input type="text" name="task" /> <input type="submit" value="search" />
+	</form>
+</body>
+</html>

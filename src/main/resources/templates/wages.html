@@ -1,0 +1,152 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+
+<title>Welcome to Awake Cafe</title>
+
+<!-- Mobile Specific Meta -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+<!-- Bootstrap  -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/bootstrap-iso.css}" />
+
+<!-- icon fonts font Awesome -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/font-awesome.min.css}" />
+
+<!-- Custom Styles -->
+<link rel="stylesheet" type="text/css" th:href="@{css/style.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/Style-Menu-Bar.css}" />
+
+
+<style type="text/css">
+<!--
+.input {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	border-style: none
+}
+-->
+</style>
+</head>
+<body>
+	<nav class="mobile-menu">
+		<label for="show-menu" class="show-menu"><span>Menu</span>
+			<div class="lines"></div></label> <input type="checkbox" id="show-menu" />
+		<ul id="menu">
+			<li><a href="/user-info">Home</a></li>
+			<li><a href="/staff-admin">Staff</a></li>
+			<li><a href="/user-check-time">Check Time</a></li>
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown" role="button" aria-haspopup="true"
+				aria-expanded="false">History<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="/history">วันนี้ใครมาทำงานบ้าง?</a></li>
+					<li><a href="/allhistory">ประวัติทำงานของพนักงาน</a></li>
+				</ul></li>
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown" role="button" aria-haspopup="true"
+				aria-expanded="false">Wage<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="/ViewTotalEmp">ดูค่าจ้างพนักงาน</a></li>
+				</ul></li>
+			<li><a href="/logout">Log Out!</a></li>
+		</ul>
+	</nav>
+	<div id="preloader">
+		<div id="loader">
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="lading"></div>
+		</div>
+	</div>
+	<!-- /#preloader -->
+	<!-- Preloader End-->
+<section id="page-top" class="section-style" data-background-image="images/background/wallpaper10.jpg">
+    <div class="pattern height-resize">
+        <div class="container"><br/><br/><br/>
+
+            <h1 class="site-title">
+                Wages
+            </h1><!-- /.site-title -->
+
+            <div class="bootstrap-iso" >
+                <div align="center" style="background-color: #d5d5d5;">
+				<form action="/findWages" method="post">
+                <select title="Month" class="select" name="month">
+                	<option value="0"></option>
+                    <option value="1">มกราคม</option>
+                    <option value="2">กุมภาพันธ์</option>
+                    <option value="3">มีนาคม</option>
+                    <option value="4">เมษายน</option>
+                    <option value="5">พฤษภาคม</option>
+                    <option value="6">มิถุนายน</option>
+                    <option value="7">กรกฏาคม</option>
+                    <option value="8">สิงหาคม</option>
+                    <option value="9">กันยายน</option>
+                    <option value="10">ตุลาคม</option>
+                    <option value="11">พฤษจิกายน</option>
+                    <option value="12">ธันวาคม</option>
+                </select>
+				<button type="submit" class="btn btn-primary">เลือกเดือน</button><br/><br/>
+				</form>
+                        <table border="1" cellpadding="25" cellspacing="25" style="background-color: #C6E2FF " class="table table-striped" >
+                            <tr>
+                                <th style='background-color: #79CDCD;' > ลำดับที่ </th>
+                                <th style='background-color: #79CDCD;'> ค่าจ้าง </th>
+                                <th style='background-color: #79CDCD;'> วันที่จ่าย </th>
+                                <th style='background-color: #79CDCD;'> รหัสพนักงาน </th>
+                                <th style='background-color: #79CDCD;'> ชื่อพนักงาน </th>
+                                <th style='background-color: #79CDCD;'> เวลาที่จ่าย </th>
+                            </tr>
+
+                            <tr th:each="wages:${wasList}" style="color:black">
+                            	<td th:text="${wages.WageNo}"></td>
+                            	<td th:text="${wages.TotalWage}"></td>
+                            	<td th:text="${wages.WDate}"></td>
+                            	<p th:each="employee:${userList}">
+                            	<td th:text="${employee.IdEmp}"> </td>                           	
+                            	<td th:text="|${employee.fname}  ${employee.lname}|"></td>
+                            	</p>
+                            	<td th:text="${wages.WTime}"></td>
+                            </tr>
+                            <tr><td style="background-color: #79CDCD;" colspan="3" align="center"><b>รวมเป็นเงิน</b></td>
+                                <td style="background-color: #afd9ee; color:black" colspan="3" align="center"><b> <span th:text="${sum}" ></span> บาท </b></td></tr>
+                        </table>
+                </div>
+            </div><br/><br/><br/><br/>
+        </div><!-- /.container -->
+    </div><!-- /.pattern -->
+
+</section><!-- /#page-top -->
+	<!-- Footer Section -->
+	<footer id="footer-section">
+		<p class="copyright">2014-2015, All Rights Reserved. Designed by
+			Developed by Jewel Theme</p>
+	</footer>
+
+
+	<!-- jQuery Library -->
+	<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+	<!-- Modernizr js -->
+	<script type="text/javascript" src="js/modernizr-2.8.0.min.js"></script>
+	<!-- Plugins -->
+	<script type="text/javascript" src="js/plugins.js"></script>
+	<!-- Custom JavaScript Functions -->
+	<script type="text/javascript" src="js/functions.js"></script>
+	<!-- Custom JavaScript Functions -->
+	<script type="text/javascript" src="js/jquery.ajaxchimp.min.js"></script>
+	<script type="text/javascript" src="js/clock.js"></script>
+</body>
+</html>

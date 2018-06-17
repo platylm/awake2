@@ -1,0 +1,139 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+
+<title>Welcome to Awake Cafe</title>
+
+<!-- Mobile Specific Meta -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+<!-- Bootstrap  -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/bootstrap-iso.css}" />
+
+<!-- icon fonts font Awesome -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/font-awesome.min.css}" />
+
+<!-- Custom Styles -->
+<link rel="stylesheet" type="text/css" th:href="@{css/style.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/Style-Menu-Bar.css}" />
+
+
+<style type="text/css">
+<!--
+.input {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	border-style: none
+}
+-->
+</style>
+</head>
+<body>
+	<nav class="mobile-menu">
+		<label for="show-menu" class="show-menu"><span>Menu</span>
+			<div class="lines"></div></label> <input type="checkbox" id="show-menu" />
+		<ul id="menu">
+			<li><a href="/user-info">Home</a></li>
+			<li><a href="/staff-admin">Staff</a></li>
+			<li><a href="/user-check-time">Check Time</a></li>
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown" role="button" aria-haspopup="true"
+				aria-expanded="false">History<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="/history">วันนี้ใครมาทำงานบ้าง?</a></li>
+					<li><a href="/allhistory">ประวัติทำงานของพนักงาน</a></li>
+				</ul></li>
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown" role="button" aria-haspopup="true"
+				aria-expanded="false">Wage<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="/ViewTotalEmp">ดูค่าจ้างพนักงาน</a></li>
+				</ul></li>
+			<li><a href="/logout">Log Out!</a></li>
+		</ul>
+	</nav>
+	<div id="preloader">
+		<div id="loader">
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="lading"></div>
+		</div>
+	</div>
+	<!-- /#preloader -->
+	<!-- Preloader End-->
+
+	<!-- Page Top Section -->
+	<section id="page-top" class="section-style"
+		data-background-image="images/background/wallpaper5.jpg">
+		<div class="pattern height-resize">
+			<div class="container">
+				<h1 class="site-title">
+					<br />Check Time Staff
+				</h1>
+				<!-- /.site-title -->
+				<div class="bootstrap-iso" style="background-color: transparent">
+
+					<table border="1" class="table table-hover" width="200%"
+						cellpadding="2"
+						style="background-color: #d9edf7; color: black; font-family: 'TH SarabunPSK'; font-size: 25px">
+						<tr>
+							<th style='background-color: #bce8f1;'>ลำดับที่</th>
+							<th style='background-color: #bce8f1;'>วัน/เดือน/ปี</th>
+							<th style='background-color: #bce8f1;'>ชื่อ-สกุล</th>
+							<th style='background-color: #bce8f1;'>Check In</th>
+							<th style='background-color: #bce8f1;'>Check Out</th>
+							
+						</tr>
+						<tr th:each="workTime : ${showDate}">
+							<td th:text="${workTime.checkNo}"></td>
+							<td th:text="${workTime.dateWork}"></td>
+							<td th:text="|${workTime.employee.fname}  ${workTime.employee.lname}|"></td>
+							<td th:text="${workTime.checkIn}"></td>
+							<td th:text="${workTime.checkOut}"></td>
+							</tr>
+					</table>
+
+				</div>
+				<br />
+
+			</div>
+			<!-- /.container -->
+		</div>
+		<!-- /.pattern -->
+	</section>
+	<!-- /#page-top -->
+	<!-- Page Top Section  End -->
+
+
+	<!-- Footer Section -->
+	<footer id="footer-section">
+		<p class="copyright">2014-2015, All Rights Reserved. Designed by
+			Developed by Jewel Theme</p>
+	</footer>
+
+
+	<!-- jQuery Library -->
+	<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+	<!-- Modernizr js -->
+	<script type="text/javascript" src="js/modernizr-2.8.0.min.js"></script>
+	<!-- Plugins -->
+	<script type="text/javascript" src="js/plugins.js"></script>
+	<!-- Custom JavaScript Functions -->
+	<script type="text/javascript" src="js/functions.js"></script>
+	<!-- Custom JavaScript Functions -->
+	<script type="text/javascript" src="js/jquery.ajaxchimp.min.js"></script>
+	<script type="text/javascript" src="js/clock.js"></script>
+</body>
+</html>
